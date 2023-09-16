@@ -33,8 +33,8 @@ type Mutation {
     ): Transaction
 
     createLocation(
-        lat: Float 
-        lng: Float 
+        lat: Float
+        lng: Float
         name: String
     ): Location
 

@@ -3,6 +3,12 @@
 
 ### Setup
 
+Install ubuntu dependencies
+
+```sh
+sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev texlive-full
+```
+
 Create the virtual environments
 
 ```shell
