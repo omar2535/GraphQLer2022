@@ -32,3 +32,9 @@ node_modules/*
 github.json
 starwars.json
 yelp.json
+
+
+
+
+# Omar specific stuff
+omar-test/

@@ -123,19 +123,13 @@ if __name__ == '__main__':
 
         function_builder = FunctionBuilder(
             os.path.join(parsed_schema_path, schema_file_name),
-            function_list_file_path=os.path.join(
-                parsed_schema_path, function_list_file_name),
-            query_parameter_file_path=os.path.join(
-                parsed_schema_path, query_parameter_file_name),
-            mutation_parameter_file_path=os.path.join(
-                parsed_schema_path, mutation_parameter_file_name),
-
+            function_list_file_path=os.path.join(parsed_schema_path, function_list_file_name),
+            query_parameter_file_path=os.path.join(parsed_schema_path, query_parameter_file_name),
+            mutation_parameter_file_path=os.path.join(parsed_schema_path, mutation_parameter_file_name),
         )
 
-        obj_seq_builder = ObjectSequenceBuilder(
-            os.path.join(parsed_schema_path, schema_file_name))
+        obj_seq_builder = ObjectSequenceBuilder(os.path.join(parsed_schema_path, schema_file_name))
         sequence_builder = SequenceBuilder(
-
             obj_seq_builder.build_sequence()[0],
             function_builder
         )
@@ -149,21 +143,12 @@ if __name__ == '__main__':
         elif args.fuzzer == 'random':
             fuzzer = RandomFuzzer(schema, cache)
         elif args.fuzzer == 'wordlist':
-            fuzzer = WordlistFuzzer(
-                schema, cache, open(args.wordlist).readlines())
+            fuzzer = WordlistFuzzer(schema, cache, open(args.wordlist).readlines())
         else:
             fuzzer = RandomFuzzer(schema, cache)
 
-        requestor = Requestor(req_seq,
-                              cache,
-                              fuzzer,
-                              url,
-                              schema,
-                              function_builder,
-                              logger
-                              )
+        requestor = Requestor(req_seq, cache, fuzzer, url, schema, function_builder, logger)
 
         requestor.execute(schema)
         logger.log()
-        json.dump(requestor.errors, open(os.path.join(
-            parsed_schema_path, 'errors.json'), 'w'))
+        json.dump(requestor.errors, open(os.path.join(parsed_schema_path, 'errors.json'), 'w'))

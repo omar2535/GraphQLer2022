@@ -1,7 +1,14 @@
 from graphql_types.process_functions import FunctionBuilder
+from typing import List
 
 class SequenceBuilder:
-    def __init__(self, object_sequence, function_builder: FunctionBuilder):
+    def __init__(self, object_sequence: List[str], function_builder: FunctionBuilder):
+        """Initialize the sequence builder class
+
+        Args:
+            object_sequence (List[str]): List of objects that need to be created in that order
+            function_builder (FunctionBuilder): Building the necessary functions based on the object
+        """
         #schema_json = schema
         self.object_sequence = object_sequence
 
