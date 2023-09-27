@@ -91,8 +91,7 @@ if __name__ == '__main__':
             schema_builder = parse.SchemaBuilder(url=url)
         elif introspection_json_path:
             with open(introspection_json_path) as f:
-                schema_builder = parse.SchemaBuilder(
-                    introspection_json=json.load(f))
+                schema_builder = parse.SchemaBuilder(introspection_json=json.load(f))
         else:
             raise Exception(
                 "please add corrent introspection source to arguments by --url or --introspection-json")

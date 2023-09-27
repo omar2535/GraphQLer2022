@@ -26,6 +26,8 @@ class SequenceBuilder:
         '''
         if funcs:
             for f_name, f_body in funcs.items():
+                # breakpoint()
+
                 # Mutation-Only: Filter function type.
                 if action is not None:
                     if f_body.get("functionType") and f_body["functionType"].upper() != action:
@@ -44,7 +46,7 @@ class SequenceBuilder:
                         self.processed_objects.append(ob)
                 else:
                     self.request_sequence.append(f_name)
-                    self.processed_objects.append(ob) 
+                    self.processed_objects.append(ob)
 
 
     def build_request_sequence(self, OUTPUTFILE=None):
@@ -63,7 +65,9 @@ class SequenceBuilder:
             # MUTATION: UPDATE
             candidateFunc = self.fb.get_mutation_mapping_by_input_datatype(ob)
             self.function_checking(candidateFunc, "UPDATE", ob)
-        
+
+        breakpoint()
+
         while len(self.object_stack) > 0:
             ob = self.object_stack.pop()
 
@@ -80,9 +84,9 @@ class SequenceBuilder:
             for x in self.request_sequence:
                 f.writelines(x + "\n")
             f.close()
-        
+
         return self.request_sequence
-        
+
 
 if __name__ == '__main__':
     SCHEMAFILE = "neogeek_compiled.json"

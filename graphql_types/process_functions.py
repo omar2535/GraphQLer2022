@@ -57,6 +57,7 @@ class FunctionBuilder:
         
         # if there are no motations, we will not proceed to build mutation list
         if schema_json.get("mutations") != None:
+            # breakpoint()
             self.mutations = schema_json["mutations"]
             self.mutation_datatype_mappings = self.link_functions_with_datatype("mutations")
             self._check_function_type()
@@ -477,9 +478,11 @@ class FunctionBuilder:
             list[function_name]["outputDatatype"] = output_data_type
 
             # First we check if the function has input
-            if function_body["args"] != None:
+            if input_args:
                 # then we check for any input items and see if it match any of the Objects
-                for arg_name, arg_body in function_body["args"].items():
+                for arg_name, arg_body in input_args.items():
+                    # if function_name == "createUser":
+                    #     breakpoint()
                     # again we only focus on the real Object, not the status like LIST or something
                     arg_data_type = self._get_type(arg_body)
 
@@ -530,6 +533,18 @@ class FunctionBuilder:
                 list[function_name]["inputDatatype"] = None
 
         return list
+
+# '''
+#     def _get_scalar_with_datatype(self, name):
+#         objects_scalar = self._link_objects_with_data_type()
+#         input_objects_scalar = self._link_objects_with_data_type()
+#         list = {}
+#         objects_scalar.update(input_objects_scalar)
+#         if objects_scalar.get(name) != None:
+#             return objects_scalar[name]["name"]
+#         else:
+#             return None
+# '''
 
     # Function to bypass any status like LIST or something
     # return the true type of the data
